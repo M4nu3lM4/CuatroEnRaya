@@ -1,33 +1,35 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 
-import java.util.Objects;
+import org.iesalandalus.programacion.cuatroenraya.modelo.Ficha;
 
 public class Casilla {
 
     private Ficha ficha;
 
-    public Casilla(){
+    public Casilla() {
         ficha = null;
-
     }
-    public Ficha getFicha(){
+
+    public Ficha getFicha() {
         return ficha;
     }
 
-    public void setFicha(Ficha ficha) {
-        if (ficha == null){
-            Objects.requireNonNull(ficha,"La ficha no puede ser nula");
+    public void setFicha(Ficha ficha)throws CuatroEnRayaExcepcion {
+        if (ficha == null) {
+            throw new NullPointerException("No se puede poner una ficha nula.");
+        }
+        if (this.ficha != null) {
+            throw new CuatroEnRayaExcepcion("La casilla ya contiene una ficha.");
         }
         this.ficha = ficha;
     }
 
-    public boolean estaOcupada(){
-        return ficha!=null;
-
+    public boolean estaOcupada() {
+        return ficha != null;
     }
 
     @Override
     public String toString() {
-        return String.format("[ficha=%s]", ficha);
+        return String.format("%s", (ficha == null) ? " " : ficha.toString());
     }
 }
