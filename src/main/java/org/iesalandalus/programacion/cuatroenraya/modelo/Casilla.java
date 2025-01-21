@@ -30,6 +30,6 @@ public class Casilla {
 
     @Override
     public String toString() {
-        return String.format("%s", (ficha == null) ? " " : ficha.toString());
+        return String.format("%s", (this.ficha != null) ?  this.ficha.toString() : " ");
     }
 }

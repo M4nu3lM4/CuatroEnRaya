@@ -5,21 +5,34 @@ import java.util.Objects;
 
 public record Jugador(String nombre, Ficha colorFichas) {
 
-
-    private void validarNombre(String nombre){
-        if(nombre == null){
-            Objects.requireNonNull(nombre,"El nombre no puede ser nulo.");
-        }
-
-    }
-    private void validarColorFichas(Ficha colorFichas){
-        if(colorFichas == null){
-            Objects.requireNonNull(colorFichas,"El color de las fichas no puede ser nulo.");
-        }
+    /**1º Constructor canónico con validaciones **/
+    public Jugador {
+        validarNombre(nombre);
+        validarColorFichas(colorFichas);
     }
 
+    /**2º Método para validar el nombre **/
+    private void validarNombre(String nombre) {
+        if (nombre == null ) {
+            throw new NullPointerException("El nombre no puede ser nulo.");
+        }
+        if(nombre.trim().isEmpty()){
+            throw new IllegalArgumentException("El nombre no puede estar en blanco.");
+        }
+    }
+
+    /**3º Método para validar el color de las fichas **/
+    private static void validarColorFichas(Ficha colorFichas) {
+        if (colorFichas == null) {
+            throw new NullPointerException("El color de las fichas no puede ser nulo.");
+        }
+    }
+
+    /**4º Método toString sobreescrito utilizando String.format **/
     @Override
     public String toString() {
-        return String.format("[colorfichas=%s]", colorFichas);
+        return String.format("%s (%s)", this.nombre, this.colorFichas.toString());
     }
 }
+
+

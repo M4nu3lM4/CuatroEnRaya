@@ -1,18 +1,11 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 
 public enum Ficha {
-    AZUL("A") , VERDE("V");
-
-    private String cadenaAmostrar;
-
-    private Ficha(String cadenaAmostrar){
-
-        this.cadenaAmostrar = cadenaAmostrar;
-    }
+    AZUL, VERDE;
 
     @Override
-    public String toString() {
-        return cadenaAmostrar;
+    public String toString(){
+        return name().substring(0,1);
     }
 }
 
