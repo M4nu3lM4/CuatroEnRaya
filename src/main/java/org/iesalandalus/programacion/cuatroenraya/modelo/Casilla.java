@@ -5,8 +5,8 @@ public class Casilla {
 
     private Ficha ficha;
 
-    public Casilla() {
-        ficha = null;
+    public Casilla(Ficha ficha) {
+        this.ficha = ficha;
     }
 
     public Ficha getFicha() {
