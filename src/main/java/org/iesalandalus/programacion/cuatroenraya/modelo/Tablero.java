@@ -49,17 +49,14 @@ public class Tablero {
         comprobarColumna(columna);
         comprobarFicha(ficha);
 
-        if (columnaLlena(columna)) {
-            throw new CuatroEnRayaExcepcion("Columna llena.");
+        for (int i = 0; i < FILAS; i++) {
+            if (casillas[i][columna] == null || casillas[i][columna].getFicha() == null) {
+                casillas[i][columna] = new Casilla(ficha);
+                return comprobarTirada(i, columna);
+            }
         }
 
-        int fila = getPrimeraFilaVacia(columna);
-        if (fila == -1) {
-            throw new CuatroEnRayaExcepcion("ERROR: No hay espacio en esta columna.");
-        }
-
-        casillas[fila][columna] = new Casilla(ficha); /**Se pasa la ficha al constructor de Casilla**/
-        return comprobarTirada(fila, columna);
+        throw new CuatroEnRayaExcepcion("Columna llena.");
     }
 
     /** 7º Metodo para comprobar que la ficha no es nula **/
@@ -96,8 +93,8 @@ public class Tablero {
     }
 
     /** 11º Metodo para saber si se alcanzó el objetivo **/
-    private boolean objetivoAlcanzado(int fichasConsecutivas) {
-        return fichasConsecutivas >= FICHAS_IGUALES_CONSECUTIVAS_NECESARIAS;
+    private boolean objetivoAlcanzado(int fichasIgualesConsecutivas) {
+        return fichasIgualesConsecutivas >= FICHAS_IGUALES_CONSECUTIVAS_NECESARIAS;
     }
 
     /** 12º Comprobamos horizontalmente **/
@@ -184,33 +181,24 @@ public class Tablero {
     /** 17º Metodo para imprimir el tablero **/
     @Override
     public String toString() {
-        StringBuilder salida = new StringBuilder();
-        /**Iterar desde la fila superior hacia abajo**/
+        StringBuilder sb = new StringBuilder();
         for (int i = FILAS - 1; i >= 0; i--) {
-            /**Comienza la fila**/
-            salida.append("|");
-            /** Iterar por cada columna **/
+            sb.append("|");
             for (int j = 0; j < COLUMNAS; j++) {
-
-                if (casillas[i][j] == null) {
-                    /**Si no hay ficha, espacio vacío**/
-                    salida.append(" ");
+                if (casillas[i][j] == null || casillas[i][j].getFicha() == null) {
+                    sb.append(" ");
                 } else {
-                    /** Mostrar la ficha correspondiente**/
-                    salida.append(casillas[i][j].getFicha());
+                    Ficha ficha = casillas[i][j].getFicha();
+                    if (ficha == Ficha.AZUL) {
+                        sb.append("A");
+                    } else if (ficha == Ficha.VERDE) {
+                        sb.append("V");
+                    }
                 }
-                salida.append("|"); /** Separador de columnas**/
             }
-            salida.append("\n"); /** Salto de línea tras cada fila**/
+            sb.append("|\n");
         }
-
-        /** Linea inferior**/
-        salida.append(" ");
-        for (int j = 0; j < COLUMNAS; j++) {
-            salida.append("---"); /** Separador inferior**/
-        }
-        salida.append("\n");
-
-        return salida.toString();
+        sb.append(" -------\n");
+        return sb.toString();
     }
 }
