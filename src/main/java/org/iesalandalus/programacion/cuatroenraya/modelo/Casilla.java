@@ -9,6 +9,11 @@ public class Casilla {
         this.ficha = ficha;
     }
 
+    public Casilla() {
+        this.ficha = null;
+    }
+
+
     public Ficha getFicha() {
         return ficha;
     }
