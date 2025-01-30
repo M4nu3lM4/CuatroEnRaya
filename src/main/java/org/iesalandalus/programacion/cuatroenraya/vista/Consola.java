@@ -5,9 +5,10 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
 
-    // Constructor privado para evitar instanciación
+
     private Consola() {}
 
+/**1º leerá el nombre del jugador mientras este sea válido.**/
     public static String leerNombre() {
         String nombre;
         do {
@@ -17,6 +18,7 @@ public class Consola {
         return nombre;
     }
 
+/**2º leerá el color de una ficha mientras este no sea válido. **/
     public static Ficha elegirColorFichas() {
         Ficha colorFichas = null;
         do {
@@ -31,6 +33,7 @@ public class Consola {
         return colorFichas;
     }
 
+/**3º leerá el nombre del primer jugador y el color de sus fichas y lo devolverá. **/
     public static Jugador leerJugador() {
         System.out.println("Introduce los datos del PRIMER jugador");
         String nombre = leerNombre();
@@ -38,12 +41,14 @@ public class Consola {
         return new Jugador(nombre, color);
     }
 
+/**4º leerá el nombre del segundo jugador y devolverá dicho jugador con el color de ficha pasado por parámetro. **/
     public static Jugador leerJugador(Ficha colorFicha) {
         System.out.println("Introduce los datos del SEGUNDO jugador");
         String nombre = leerNombre();
         return new Jugador(nombre, colorFicha);
     }
 
+/**5º imprimirá el nombre del jugador y le indicará que elija la columna en la que quiere introducir su ficha y esto lo repetirá mientras la columna elegida no sea válida. **/
     public static int leerColumna(Jugador jugador) {
         int columna;
         do {
