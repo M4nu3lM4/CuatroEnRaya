@@ -1,13 +1,13 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 import org.iesalandalus.programacion.cuatroenraya.vista.*;
-
+import org.iesalandalus.programacion.cuatroenraya.modelo.*;
 public class CuatroEnRaya {
     private static final int NUMERO_JUGADORES = 2;
 
     private Jugador[] jugadores;
     private Tablero tablero;
 
-
+/**1º metodo para crear el cuatro en raya **/
     public CuatroEnRaya(Jugador jugador1, Jugador jugador2){
 
         this.jugadores = new Jugador[NUMERO_JUGADORES];
@@ -16,7 +16,7 @@ public class CuatroEnRaya {
         this.tablero = new Tablero();
 
     }
-
+/**2º metodo para los turnos de los jugadores **/
     private boolean tirar(Jugador jugador) {
         boolean esValida = false;
         boolean esGanador = false;
@@ -33,13 +33,13 @@ public class CuatroEnRaya {
         } while (!esValida);
         return esGanador;
     }
-
+/**3º Metodo para comenzar el juego **/
     public void jugar() {
         System.out.println("\n COMIENZA EL JUEGO");
         int turno = (int) (Math.random()*2);
         boolean esGanador = false;
         Jugador ganador = null;
-        while(!esGanador && this.tablero.estaLleno()){
+        while(!esGanador && !this.tablero.estaLleno()){
             esGanador = tirar(jugadores[turno]);
             if (esGanador){
                 ganador = jugadores[turno];
@@ -48,7 +48,7 @@ public class CuatroEnRaya {
         }
         System.out.println(tablero);
         if (esGanador){
-            System.out.println("ha ganado el jugador "+ganador);
+            System.out.println("ENHORABUENA, " +ganador.nombre()+ " has ganado!!!");
         }else{
             System.out.println("Fin del juego: Empate");
         }

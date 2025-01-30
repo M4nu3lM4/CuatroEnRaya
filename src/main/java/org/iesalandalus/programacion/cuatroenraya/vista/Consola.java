@@ -1,65 +1,55 @@
 package org.iesalandalus.programacion.cuatroenraya.vista;
+
 import org.iesalandalus.programacion.cuatroenraya.modelo.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
+
 public class Consola {
 
-private Consola(){}
+    // Constructor privado para evitar instanciación
+    private Consola() {}
 
-    public static String leerNombre(){
-
-    String nombre = "";
-
-    do{
-        System.out.println("Introduce el nombre del jugador");
-        nombre = Entrada.cadena();
-    }while (nombre.trim().equals(""));
-    return nombre;
+    public static String leerNombre() {
+        String nombre;
+        do {
+            System.out.println("Introduce el nombre del jugador:");
+            nombre = Entrada.cadena().trim();
+        } while (nombre.isEmpty());
+        return nombre;
     }
 
-    public static Ficha elegirColorFichas(){
-
+    public static Ficha elegirColorFichas() {
         Ficha colorFichas = null;
-
-        do{
-            System.out.println("Introduce el color de tus fichas");
-            String color =Entrada.cadena();
-
-            if(color.equals("A") || color.toUpperCase().equals(("AZUL"))){
+        do {
+            System.out.println("Elige el color de tus fichas (0-AZUL, 1-VERDE):");
+            int eleccion = Entrada.entero();
+            if (eleccion == 0) {
                 colorFichas = Ficha.AZUL;
-            } else if (color.equals("V") || color.toUpperCase().equals(("VERDE"))) {
+            } else if (eleccion == 1) {
                 colorFichas = Ficha.VERDE;
             }
-        }while (colorFichas == null);
+        } while (colorFichas == null);
         return colorFichas;
     }
 
-    public static Jugador leerJugador(){
-
+    public static Jugador leerJugador() {
+        System.out.println("Introduce los datos del PRIMER jugador");
         String nombre = leerNombre();
-        Ficha color= elegirColorFichas();
-        return new Jugador(nombre, color);
-
-
-
-
-    }
-
-    public static Jugador leerJugador(Ficha colorFicha){
-
-        String nombre = leerNombre();
-        Ficha color = colorFicha;
+        Ficha color = elegirColorFichas();
         return new Jugador(nombre, color);
     }
 
-    public static int leerColumna(Jugador jugador){
+    public static Jugador leerJugador(Ficha colorFicha) {
+        System.out.println("Introduce los datos del SEGUNDO jugador");
+        String nombre = leerNombre();
+        return new Jugador(nombre, colorFicha);
+    }
 
-    int columna = 0;
-        do{
-            System.out.print(jugador.nombre() + "Introduce la columna en la que deseas introducir la ficha(0 - 6):");
+    public static int leerColumna(Jugador jugador) {
+        int columna;
+        do {
+            System.out.printf("%s, introduce la columna en la que deseas introducir la ficha (0 - 6): ", jugador.nombre());
             columna = Entrada.entero();
-        }while(columna < 0 || columna > 7);
+        } while (columna < 0 || columna > 6);
         return columna;
     }
-
-
 }
