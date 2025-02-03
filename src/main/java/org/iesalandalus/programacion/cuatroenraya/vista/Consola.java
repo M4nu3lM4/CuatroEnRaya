@@ -1,5 +1,4 @@
 package org.iesalandalus.programacion.cuatroenraya.vista;
-
 import org.iesalandalus.programacion.cuatroenraya.modelo.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
