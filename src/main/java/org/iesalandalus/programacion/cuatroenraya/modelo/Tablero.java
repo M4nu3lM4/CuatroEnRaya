@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 
+import java.util.Objects;
+
 public class Tablero {
 
     /** Definimos las variables y creamos el array bidimensional **/
@@ -61,9 +63,7 @@ public class Tablero {
 
     /** 7º Metodo para comprobar que la ficha no es nula **/
     private void comprobarFicha(Ficha ficha) {
-        if (ficha == null) {
-            throw new NullPointerException("La ficha no puede ser nula.");
-        }
+        Objects.requireNonNull(ficha,"La ficha no puede ser nula.");
     }
 
     /** 8º Comprobamos que la columna no está fuera de rango **/
@@ -181,24 +181,24 @@ public class Tablero {
     /** 17º Metodo para imprimir el tablero **/
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder salida = new StringBuilder();
         for (int i = FILAS - 1; i >= 0; i--) {
-            sb.append("|");
+            salida.append("|");
             for (int j = 0; j < COLUMNAS; j++) {
                 if (casillas[i][j] == null || casillas[i][j].getFicha() == null) {
-                    sb.append(" ");
+                    salida.append(" ");
                 } else {
                     Ficha ficha = casillas[i][j].getFicha();
                     if (ficha == Ficha.AZUL) {
-                        sb.append("A");
+                        salida.append("A");
                     } else if (ficha == Ficha.VERDE) {
-                        sb.append("V");
+                        salida.append("V");
                     }
                 }
             }
-            sb.append("|\n");
+            salida.append("|\n");
         }
-        sb.append(" -------\n");
-        return sb.toString();
+        salida.append(" -------\n");
+        return salida.toString();
     }
 }
