@@ -12,7 +12,7 @@ public class Consola {
     public static String leerNombre() {
         String nombre;
         do {
-            System.out.println("Introduce el nombre del jugador:");
+            System.out.printf("Introduce el nombre del jugador:");
             nombre = Entrada.cadena().trim();
         } while (nombre.isEmpty());
         return nombre;
@@ -22,7 +22,7 @@ public class Consola {
     public static Ficha elegirColorFichas() {
         Ficha colorFichas = null;
         do {
-            System.out.println("Elige el color de tus fichas (0-AZUL, 1-VERDE):");
+            System.out.printf("Elige el color de tus fichas (0-AZUL, 1-VERDE):");
             int eleccion = Entrada.entero();
             if (eleccion == 0) {
                 colorFichas = Ficha.AZUL;
@@ -48,7 +48,7 @@ public class Consola {
         return new Jugador(nombre, colorFicha);
     }
 
-/**5º imprimirá el nombre del jugador y le indicará que elija la columna en la que quiere introducir su ficha y esto lo repetirá mientras la columna elegida no sea válida. **/
+/**5º leerá el nombre del jugador y le indicará que elija la columna en la que quiere introducir su ficha y esto lo repetirá mientras la columna elegida no sea válida. **/
     public static int leerColumna(Jugador jugador) {
         int columna;
         do {
