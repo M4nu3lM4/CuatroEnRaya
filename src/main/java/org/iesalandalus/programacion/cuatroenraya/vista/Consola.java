@@ -36,20 +36,20 @@ public class Consola {
     }
 
     public static Jugador leerJugador() throws CuatroEnRayaExcepcion {
-
+        Ficha colorFichas;
         System.out.print("Introduce los datos del PRIMER jugador ");
-        leerNombre();
-        elegirColorFichas();
+        String nombre = Entrada.cadena();
+        colorFichas = elegirColorFichas();
 
-        return new Jugador(leerNombre(), elegirColorFichas());
+        return new Jugador(nombre, colorFichas);
     }
 
     public static Jugador leerJugador(Ficha ficha) throws CuatroEnRayaExcepcion {
 
         System.out.print("Introduce los datos del SEGUNDO jugador ");
-        leerNombre();
-        leerJugador(ficha);
-        return new Jugador(leerNombre(), elegirColorFichas());
+        String nombre = Entrada.cadena();
+        ficha = elegirColorFichas();
+        return new Jugador(nombre, ficha);
     }
 
     public static int leerColumna(Jugador jugador) {
