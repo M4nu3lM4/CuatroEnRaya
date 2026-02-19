@@ -48,7 +48,7 @@ public class Consola {
 
         System.out.print("Introduce los datos del SEGUNDO jugador ");
         String nombre = Entrada.cadena();
-        ficha = elegirColorFichas();
+
         return new Jugador(nombre, ficha);
     }
 
