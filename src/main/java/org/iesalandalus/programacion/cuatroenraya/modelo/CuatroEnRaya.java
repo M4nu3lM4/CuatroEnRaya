@@ -13,11 +13,11 @@ public class CuatroEnRaya {
 
     public CuatroEnRaya(Jugador jugador1, Jugador jugador2) throws CuatroEnRayaExcepcion {
 
-        if (jugador1 == null | jugador2 == null){
+        if (jugador1 == null || jugador2 == null){
             throw new CuatroEnRayaExcepcion("Los jugadores no pueden ser nulos.");
         }
 
-        if (jugador1.equals(jugador2) | jugador2.equals(jugador1)) {
+        if (jugador1.equals(jugador2) || jugador2.equals(jugador1)) {
             throw new CuatroEnRayaExcepcion("Los jugadores no pueden ser iguales");
         }
 
@@ -32,15 +32,12 @@ public class CuatroEnRaya {
 
     private boolean tirar(Jugador jugador) throws CuatroEnRayaExcepcion {
         boolean ganador = false;
-        boolean jugadaValida = false;
-        int columna;
+        boolean jugadaValida = true;
         do {
-            Consola.leerColumna(jugador);
             try {
                 tablero.introducirFicha(Consola.leerColumna(jugador),Consola.elegirColorFichas());
-                ganador = true;
             }catch (CuatroEnRayaExcepcion cee){
-                cee.getMessage();
+                System.out.println("La fila esta llena.");
             }
         }while (!jugadaValida);
         ganador = true;
@@ -52,15 +49,19 @@ public class CuatroEnRaya {
     public void jugar() throws CuatroEnRayaExcepcion {
 
 
-        boolean ganador = true;
+        boolean ganador = false;
 
         do {
             for (int i = 0; i < jugadores.length; i++) {
                 tirar(jugadores[i]);
             }
 
-        }while (tablero.estaVacio() && !ganador);
-        System.out.println("ENHORABUENA, s% has ganado!!!");
+        }while (!tablero.estaLleno() && ganador);
 
+        if (ganador == true){
+            System.out.println("ENHORABUENA, s% has ganado!!!");
+        } else if (tablero.estaLleno()) {
+            System.out.println("No hay mas casillas libres");
+        }
     }
 }
