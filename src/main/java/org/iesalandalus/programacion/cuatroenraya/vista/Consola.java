@@ -37,7 +37,8 @@ public class Consola {
 
     public static Jugador leerJugador() throws CuatroEnRayaExcepcion {
         Ficha colorFichas;
-        System.out.print("Introduce los datos del PRIMER jugador ");
+        System.out.println("Introduce los datos del PRIMER jugador ");
+        System.out.print("Introduce el nombre del PRIMER jugador: ");
         String nombre = Entrada.cadena();
         colorFichas = elegirColorFichas();
 
@@ -46,7 +47,8 @@ public class Consola {
 
     public static Jugador leerJugador(Ficha ficha) throws CuatroEnRayaExcepcion {
 
-        System.out.print("Introduce los datos del SEGUNDO jugador ");
+        System.out.println("Introduce los datos del SEGUNDO jugador ");
+        System.out.print("Introduce el nombre del SEGUNDO jugador: ");
         String nombre = Entrada.cadena();
 
         return new Jugador(nombre, ficha);
@@ -55,7 +57,7 @@ public class Consola {
     public static int leerColumna(Jugador jugador) {
         int columna;
         do {
-            System.out.print(jugador.nombre() + "introduce la columna en la que deseas introducir la ficha (0 - 6): ");
+            System.out.print(jugador.nombre() + " introduce la columna en la que deseas introducir la ficha (0 - 6): ");
             columna = Entrada.entero();
         } while (columna < 0 || columna > 6);
 

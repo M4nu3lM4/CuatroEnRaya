@@ -31,37 +31,48 @@ public class CuatroEnRaya {
     }
 
     private boolean tirar(Jugador jugador) throws CuatroEnRayaExcepcion {
-        boolean ganador = false;
-        boolean jugadaValida = true;
-        do {
+        boolean jugadaValida = false;
+        boolean haGanado = false;
+
+        while (!jugadaValida) {
             try {
-                tablero.introducirFicha(Consola.leerColumna(jugador),Consola.elegirColorFichas());
-            }catch (CuatroEnRayaExcepcion cee){
-                System.out.println("La fila esta llena.");
+                int columna = Consola.leerColumna(jugador);
+                haGanado = tablero.introducirFicha(columna, jugador.colorFichas());
+                jugadaValida = true;
+            } catch (CuatroEnRayaExcepcion e) {
+                System.out.println(e.getMessage());
             }
-        }while (!jugadaValida);
-        ganador = true;
-        return ganador;
+        }
+
+        return haGanado;
     }
 
 
 
     public void jugar() throws CuatroEnRayaExcepcion {
-
-
         boolean ganador = false;
+        int turno = 0;
 
-        do {
-            for (int i = 0; i < jugadores.length; i++) {
-                tirar(jugadores[i]);
+        while (!tablero.estaLleno() && !ganador) {
+
+            Jugador jugadorActual = jugadores[turno % NUMERO_JUGADORES];
+
+            System.out.println(tablero);
+
+            ganador = tirar(jugadorActual);
+
+            if (!ganador) {
+                turno++;
             }
+        }
 
-        }while (!tablero.estaLleno() && ganador);
+        System.out.println(tablero);
 
-        if (ganador == true){
-            System.out.println("ENHORABUENA, s% has ganado!!!");
-        } else if (tablero.estaLleno()) {
-            System.out.println("No hay mas casillas libres");
+        if (ganador) {
+            Jugador ganadorFinal = jugadores[turno % NUMERO_JUGADORES];
+            System.out.println("ENHORABUENA, " + ganadorFinal.nombre() + " has ganado!!!" );
+        } else {
+            System.out.println("No quedan más casillas. Empate.");
         }
     }
 }
