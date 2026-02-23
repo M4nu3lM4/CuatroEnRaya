@@ -40,7 +40,7 @@ public class CuatroEnRaya {
                 haGanado = tablero.introducirFicha(columna, jugador.colorFichas());
                 jugadaValida = true;
             } catch (CuatroEnRayaExcepcion e) {
-                System.out.println(e.getMessage());
+                System.out.println("La fila esta llena"+e.getMessage());
             }
         }
 
