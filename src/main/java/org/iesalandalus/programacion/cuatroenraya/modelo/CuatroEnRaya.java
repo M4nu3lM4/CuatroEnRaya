@@ -70,9 +70,9 @@ public class CuatroEnRaya {
 
         if (ganador) {
             Jugador ganadorFinal = jugadores[turno % NUMERO_JUGADORES];
-            System.out.println("ENHORABUENA, " + ganadorFinal.nombre() + " has ganado!!!" );
+            System.out.println("ENHORABUENA, "+ganadorFinal+" has ganado!!!" );
         } else {
-            System.out.println("No quedan más casillas. Empate.");
+            System.out.println("No hay más casillas libres. Empate.");
         }
     }
 }
